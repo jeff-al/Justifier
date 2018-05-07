@@ -225,7 +225,7 @@ int File::Exceptions(int index, string line, string & file) { //Metodo para inst
                 if (*--file.end() == ' ' && line[cont] == ' ') {
                     cont++;
                 } else {
-                    file += line[cont]; //mae loca
+                    file += line[cont];
                     cont++;
                 }
             }
