@@ -13,8 +13,8 @@ bool File::Read() { //Lee el archivo
         if (ouName != "") { //Si no hay nombre de salida no abre un archivo
             salida.open(ouName);
         }
-//        ofstream Stadistics; //archivo para guardar las apariciones
-//        Stadistics.open("Stadistics.txt");
+        //        ofstream Stadistics; //archivo para guardar las apariciones
+        //        Stadistics.open("Stadistics.txt");
         while (!file.eof()) {
             string line;
             getline(file, line);
@@ -27,7 +27,7 @@ bool File::Read() { //Lee el archivo
             salida << archivo;
             salida.close();
         }
-//        Apparitions(Stadistics); //Se crean las estadisticas
+        //        Apparitions(Stadistics); //Se crean las estadisticas
         cout << "Lectura exitosa\n" << endl;
         return true;
     } else {
@@ -79,11 +79,21 @@ void File::NewLine(string line) { //Procesa una linea y la agrega al archivo
                 case'}':
                     if (*--archivo.end() == '\n') {
                         archivo.append((openKeys - 1) * space, ' ');
-                        archivo += "}\n";
+                        if (line[i + 1] == ';') {
+                            archivo += "};\n";
+                            i++;
+                        } else {
+                            archivo += "}\n";
+                        }
                         archivo.append((openKeys - 1) * space, ' ');
                     } else {
                         archivo.erase(archivo.length() - space, space);
-                        archivo += "}\n";
+                        if (line[i + 1] == ';') {
+                            archivo += "};\n";
+                            i++;
+                        } else {
+                            archivo += "}\n";
+                        }
                         archivo.append((openKeys - 1) * space, ' ');
                     }
                     openKeys--;
@@ -175,10 +185,10 @@ void File::NewLine(string line) { //Procesa una linea y la agrega al archivo
 
 void File::Apparitions(ofstream & name) { //guarda las apariciones de las palabras reservadas en un archivo
     for (int i = 0; i < 84; i++) {
-        if(data.count [i] != 0){
-        name << data.resWords [i] + ": ";
-        name << data.count [i];
-        name << "\n";
+        if (data.count [i] != 0) {
+            name << data.resWords [i] + ": ";
+            name << data.count [i];
+            name << "\n";
         }
     }
 
