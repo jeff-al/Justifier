@@ -22,7 +22,7 @@ Semaforo::Semaforo(int valorInicial, int idf) {
 int Semaforo::Signal() {
     struct sembuf n;
     n.sem_num = 0;
-    n.sem_op = 1;
+    n.sem_op = 1; //Suma al semaforo
     n.sem_flg = 0;
 
     int x;
@@ -37,7 +37,7 @@ int Semaforo::Signal() {
 int Semaforo::Wait() {
     struct sembuf n;
     n.sem_num = 0;
-    n.sem_op = -1;
+    n.sem_op = -1;  //Resta al semaforo
     n.sem_flg = 0;
 
     int x;

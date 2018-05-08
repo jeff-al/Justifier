@@ -14,11 +14,11 @@ public:
     Controlador();
     virtual ~Controlador();
     bool Synchronize(char*[], int);
-    File f;
+    File f;                         //Objeto para manejar un archivo
 private:
-    Buzon b;
-    Semaforo sP = Semaforo(0,0);
-    Semaforo sH = Semaforo(0,1);
+    Buzon b;                        //Objeto para usar un buzon
+    Semaforo sP = Semaforo(0,0);    //Objeto para usar un Semaforo (Segundo parametro indica si es padre(0) o si es hijo (1))
+    Semaforo sH = Semaforo(0,1);    //Objeto para usar un Semaforo (Segundo parametro indica si es padre(0) o si es hijo (1))
 
     struct AreaCompartida {
         int n = 0;

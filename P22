@@ -1,30 +1,15 @@
 
-#include <iostream>
-#include <cstdlib>
+void Controlador::Display(AC *areaC) {
+//Despliega informacion en pantalla
+          for (int i = 0; i < areaC->n; i++) {
+                    if(areaC->Etiquetas[i].veces >= 0) {
+                              printf("Palabra: %s ", areaC->Etiquetas[i].palabra);
+                              cout << "Total: " << areaC->Etiquetas[i].veces << endl;
+                    }
+          }
+};
 
 
-using namespace std;
-
-struct nodo {
-     int nro;
-     struct nodo *izq, *der;
-}
-
-
-typedef struct nodo *ABB;
-// es un puntero de tipo nodo que hemos llamado ABB, que ulitizaremos
-    //para mayor facilidad de creacion de variables 
-
-ABB crearNodo(int x) {
-     ABB nuevoNodo = new(struct nodo);
-     nuevoNodo->nro = x;
-     
-     
-     nuevoNodo->izq = NULL;
-     nuevoNodo->der = NULL;
-     
-     return nuevoNodo;
-}
 
 
 

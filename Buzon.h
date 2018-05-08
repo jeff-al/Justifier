@@ -18,9 +18,9 @@ private:
     int id; // Identificador del buzon
     
     struct msgbuf{
-        long mtype;
-        int veces;
-        char mtext[32];
+        long mtype;     //Tipo del mensaje
+        int veces;      //Veces que aparece una palabra
+        char mtext[32]; //Una palabra
     };
 };
 #endif /* BUZON_H */

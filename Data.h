@@ -10,10 +10,10 @@ class Data {
 public:
 
     Data();
-     ~Data();
+    ~Data();
     queue<int> indices; //Cola de las instrucciones especiales
   
-    string resWords[84] = {
+    string resWords[84] = { //Palabras reservadas de c++
         "alignas", "alignof", "and", "and_eq", "asm", "auto", //0-5
         "bitand", "bitor", "bool", "break", //6-9
         "case", "catch", "char", "char16_t", "char32_t", "class", "compl", "const", "constexpr", "const_cast", "continue", //10-20

@@ -10,11 +10,11 @@ using namespace std;
 
 class File {
 public:
-    int openKeys = 0;
-    string archivo = "";
-    int space = 5;
-    string inName = "";
-    string ouName = "";
+    int openKeys = 0;    //Maneja las llaves abiertas en un momento dado
+    string archivo = ""; //Va almacenando el archivo
+    int space = 5;       //contiene los espacios a identar (Default 5)
+    string inName = "";  //Contiene el nombre de entrada del archivo
+    string ouName = "";  //Contiene el nombre de salida del archivo
 
     File();
 
@@ -36,7 +36,7 @@ private:
     
     void NewLine(string); //Actualiza una linea analizada y la escribe en el archivo de salida
     
-    void Apparitions(ofstream&); //Guarda las apariciones de las palabras reservadas en un archivo  
+    void Apparitions(); //Guarda las apariciones de las palabras reservadas en un archivo  
 
 };
 

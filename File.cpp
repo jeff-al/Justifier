@@ -13,8 +13,6 @@ bool File::Read() { //Lee el archivo
         if (ouName != "") { //Si no hay nombre de salida no abre un archivo
             salida.open(ouName);
         }
-        //        ofstream Stadistics; //archivo para guardar las apariciones
-        //        Stadistics.open("Stadistics.txt");
         while (!file.eof()) {
             string line;
             getline(file, line);
@@ -27,7 +25,6 @@ bool File::Read() { //Lee el archivo
             salida << archivo;
             salida.close();
         }
-        //        Apparitions(Stadistics); //Se crean las estadisticas
         cout << "Lectura exitosa\n" << endl;
         return true;
     } else {
@@ -54,7 +51,7 @@ void File::NewLine(string line) { //Procesa una linea y la agrega al archivo
             }
         } else { //Si no, entonces analiza el caracter 
             charac = line[i];
-            switch (charac) {
+            switch (charac) {//Acciones diferentes para caracteres "Especiales"
                 case ';':
                     if (*--archivo.end() == '\n') {
                         archivo.erase(archivo.length() - 1);
@@ -183,12 +180,12 @@ void File::NewLine(string line) { //Procesa una linea y la agrega al archivo
     }
 }
 
-void File::Apparitions(ofstream & name) { //guarda las apariciones de las palabras reservadas en un archivo
+void File::Apparitions() { //guarda las apariciones de las palabras reservadas en el contador de cada una
     for (int i = 0; i < 84; i++) {
         if (data.count [i] != 0) {
-            name << data.resWords [i] + ": ";
-            name << data.count [i];
-            name << "\n";
+            //name << data.resWords [i] + ": ";
+            //name << data.count [i];
+            //name << "\n";
         }
     }
 
@@ -196,29 +193,14 @@ void File::Apparitions(ofstream & name) { //guarda las apariciones de las palabr
 
 int File::Exceptions(int index, string line, string & file) { //Metodo para instrucciones "especiales"
     char ex = line[index];
-    int type;
-    switch (ex) {
-        case 'b':
-            type = 0;
-            break;
-        case 'c':
-            type = 1;
-            break;
-        case 'f':
-            type = 2;
-            break;
-        case'd':
-            type = 3;
-            break;
-    }
     int cont;
-    switch (type) {
-        case 0:
+    switch (ex) {
+        case 'b': //Break
             openKeys--;
             archivo += "break";
             return index + 4;
             break;
-        case 1:
+        case 'c': //Case
             file += "case";
             cont = index + 4;
             while (line[cont] != ':') {
@@ -235,7 +217,7 @@ int File::Exceptions(int index, string line, string & file) { //Metodo para inst
             return cont;
             break;
 
-        case 2:
+        case 'f': //For
             file += "for";
             cont = index + 3;
             while (line[cont] != ')') {
@@ -250,14 +232,14 @@ int File::Exceptions(int index, string line, string & file) { //Metodo para inst
             return cont;
             break;
 
-        case 3:
+        case 'd': //Default
             file += "default";
             cont = index + 4;
             while (line[cont] != ':') {
                 if (*--file.end() == ' ' && line[cont] == ' ') {
                     cont++;
                 } else {
-                    file += line[cont]; //mae loca
+                    file += line[cont];
                     cont++;
                 }
             }
@@ -269,14 +251,14 @@ int File::Exceptions(int index, string line, string & file) { //Metodo para inst
     }
 }
 
-void File::InName(string name) {
+void File::InName(string name) { //Recibe un nombre de entrada y lo asigna
     inName = name;
 }
 
-void File::OuName(string name) {
+void File::OuName(string name) { //Recibe un nombre de salida y lo asigna
     ouName = name;
 }
 
-void File::SetSpace(int num) {
+void File::SetSpace(int num) {  //Recibe los espacios para identar y lo asigna
     space = num;
 }

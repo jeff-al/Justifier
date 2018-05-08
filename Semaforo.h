@@ -14,14 +14,14 @@ using namespace std;
 
 class Semaforo {
 public:
-    Semaforo(int valorInicial = 0, int idf = 0);
+    Semaforo(int valorInicial = 0, int idf = 0); //Recibe valor inicial e indentificador (0 padre y 1 hijo)
      ~Semaforo();
     
-    int Signal();         //Puede ser V
-    int Wait();           //Puede ser P
+    int Signal();         //Pone señal
+    int Wait();           //Quita señal
     
 private:   
-    int id;
+    int id; //ID del semaforo
     
 
 };

@@ -15,20 +15,20 @@ Buzon::~Buzon() {
     int x;
     x = msgctl(id, IPC_RMID, 0);
     if (-1 == x) {
-        cout << "Error en el destructor buz" << endl;
+        cout << "Error en el destructor buzon" << endl;
     }
 }
 
 int Buzon::Enviar(char* mensaje, int veces, long tipo) {
     struct msgbuf a;
-    a.mtype = tipo;
     strcpy(a.mtext, mensaje);
+    a.mtype = tipo;
     a.veces = veces;
     
     int x;
     x = msgsnd(id, (void*) &a, sizeof (a), IPC_NOWAIT);
     if (-1 == x) {
-        cout << "Error en el envio" << endl;
+        cout << "Error en el enviar" << endl;
     }
 }
 
