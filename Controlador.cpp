@@ -75,7 +75,6 @@ bool Controlador::Synchronize(char *vect[], int num) {
                 sP.Wait();     //Wait al semaforo del padre
                 Display(area); //Desplega lo que hay en la memoria compartida
                 area->n = 0;
-                cout << endl;
                 sH.Signal();   //Signal del hijo al padre
             }
             exit(0);
@@ -110,9 +109,9 @@ bool Controlador::Synchronize(char *vect[], int num) {
 
 void Controlador::Display(AC *areaC) { //Despliega informacion en pantalla
     for (int i = 0; i < areaC->n; i++) {
-        if (areaC->Etiquetas[i].veces >= 0) {
-            printf("Palabra: %s ", areaC->Etiquetas[i].palabra);
-            cout << "Total: " << areaC->Etiquetas[i].veces << endl;
+        if (areaC->Etiquetas[i].veces > 0) {
+            cout << areaC->Etiquetas[i].palabra;
+            cout << ": " << areaC->Etiquetas[i].veces <<" veces" << endl;
         }
     }
 };
@@ -127,7 +126,7 @@ void Controlador::WaitForAll(int numProcs) { //Espera por todo los procesos
             cont++;
             veces = 0;
         }
-    }
+    }    
 }
 
 char* Controlador::Convert(int index) { //Convierte de string a char* (el parametro indica el indice de la palabra a convertir)

@@ -25,10 +25,10 @@ bool File::Read() { //Lee el archivo
             salida << archivo;
             salida.close();
         }
-        cout << "Lectura exitosa\n" << endl;
+        cout << "Lectura exitosa (" << inName << ")" << endl;
         return true;
     } else {
-        cout << "No se pudo abrir el archivo / No existe" << endl;
+        cout << "No se pudo abrir el archivo / No existe (" << inName << ")"<<endl;
         return false;
     }
 }
