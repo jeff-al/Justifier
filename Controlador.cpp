@@ -11,10 +11,8 @@ bool Controlador::Synchronize(char *vect[], int num) {
     int idMem = shmget(60380, sizeof (AC), 0700 | IPC_CREAT);
     AC *area = (AC *) shmat(idMem, NULL, 0);
     //
-
     int param = num - 1; //parametros de entrada
-    char *entradas[param]; //contienen los nombres de archivos de entrada
-    char *salidas[param];//contienen los nombres de archivos de salida
+    char *entradas[param-2]; //contienen los nombres de archivos de entrada
 
     int cont = 0; //Se mueve por los indices de entrada y salida
     for (int i = 1; i < num; i++) {
@@ -22,14 +20,12 @@ bool Controlador::Synchronize(char *vect[], int num) {
             f.SetSpace(atoi(vect[i + 1]));
             i++;
         } else { //Si es un nombre
-            entradas[cont] = vect[i];
-            salidas[cont] = vect[i + 1];
+            entradas[cont] = vect[i];            
             cont++;
-            i++;
         }
     }
 
-    int numProc = (param - 2) / 2; //Numero de procesos totales, ASUMIENDO QUE SIEMPRE VIENE EL -e ********************
+    int numProc = param -2; //Numero de procesos totales, ASUMIENDO QUE SIEMPRE VIENE EL -e ********************
 
     //Procesos
     int procNum; //Numero del proceso
@@ -44,10 +40,10 @@ bool Controlador::Synchronize(char *vect[], int num) {
     if (0 == id) { //Si es un proceso hijo
         string entrada; // se definen variables para entrada y salida
         string salida;
-
+        
         entrada = (string) entradas[procNum - 1]; // se les asigna un valor
-        salida = (string) salidas[procNum - 1];
-
+        salida = entrada+".sgr";
+        
         f.InName(entrada); //se pasan al archivo
         f.OuName(salida);
 
